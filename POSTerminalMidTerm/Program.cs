@@ -6,8 +6,10 @@ namespace POSTerminalMidTerm
 {
     class Program
     {
+        static List<Item> items = new List<Item>();
         static void Main(string[] args)
         {
+            PrintItemList();
             // welcome message select item
             int itemSelection = int.Parse(GetUserInput("Welcome to the Amazon Kiosk!\n Please select an item from the list: "));
 
@@ -55,6 +57,15 @@ namespace POSTerminalMidTerm
             return GetUserInput(message);
         }
 
+        public static void PrintItemList()
+        {
+            items = ItemListIO.LoadData();
+
+            foreach (Item item in items)
+            {
+                Console.WriteLine(item.Name);
+            }
+        }
         // TODO create addItem method
 
         // TODO create checkOut method

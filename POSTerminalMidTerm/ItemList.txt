@@ -1,0 +1,12 @@
+Snickers Bar|0|1.25
+Hot Cheetos|0|.99
+Apple|0|1.99
+Gears of War 5|1|59.99
+Xbox|1|199.99
+Samsung TV|1|1,599.00
+Vans|2|59.99
+Timberland Boots|2|199.99
+Crocs|2|29.99
+Microwave|3|49.99
+Coffee Pot|3|36.99
+Crockpot|3|35.47

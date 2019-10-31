@@ -8,10 +8,10 @@ namespace POSTerminalMidTerm
     class ItemListIO
     {
 
-        public List<Item> LoadData()
+        public static List<Item> LoadData()
         {
             List<Item> items = new List<Item>();
-            StreamReader reader = new StreamReader("../../../AmazonItems.txt");
+            StreamReader reader = new StreamReader("../../../ItemList.txt");
             string line = reader.ReadLine();
             while (line != null)
             {
