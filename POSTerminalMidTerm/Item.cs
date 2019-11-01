@@ -4,7 +4,7 @@ using System.Text;
 
 namespace POSTerminalMidTerm
 {
-    public enum ItemType { Food, Entertainment, Clothes, Household}
+    public enum ItemType { Food, Entertainment, Clothes, Appliances}
 
     class Item
     {

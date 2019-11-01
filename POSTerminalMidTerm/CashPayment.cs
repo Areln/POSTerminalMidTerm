@@ -16,9 +16,8 @@ namespace POSTerminalMidTerm
         {
             
             ChargeAmount = total;
-            Console.Write("Enter amount of cash you are giving:");
             //replace with the validation methods
-            Input = double.Parse(Console.ReadLine());
+            Input = Validate.ParseDoubleFromString("Enter amount of cash you are giving:");
             if (Input >= total)
             {
                 Change = Input - total;
@@ -27,7 +26,10 @@ namespace POSTerminalMidTerm
             {
                 Console.WriteLine("Not enough money");
             }
-
+        }
+        public override string ToString()
+        {
+            return $"Payment Type: Cash\n{Input:C2}\nChange: {Change:C2}"; 
         }
     }
 }

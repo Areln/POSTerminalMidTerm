@@ -11,8 +11,11 @@ namespace POSTerminalMidTerm
         public override void GetPayment(double total)
         {
             ChargeAmount = total;
-            Console.Write("Enter Check Number");
-            CheckNumber = int.Parse(Console.ReadLine());
+            CheckNumber = Validate.ParseIntFromString("Enter Check Number: ");
+        }
+        public override string ToString()
+        {
+            return $"Check Number: {CheckNumber}\nCharge Amount: {ChargeAmount:C2}";
         }
     }
 }
