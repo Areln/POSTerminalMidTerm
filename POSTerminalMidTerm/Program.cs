@@ -9,52 +9,24 @@ namespace POSTerminalMidTerm
         static List<Item> items = new List<Item>();
         static Receipt receipt = new Receipt();
         static string runAgain = "y";
+        static string orderAgain = "y";
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Amazon Kiosk");
 
-            while (runAgain != "n")
+            while (orderAgain != "n") 
             {
-                PrintItemList();
-                AddToCart();
+                Console.Clear();
+                AmazonShop();
 
-                //switch statement select another item
+                CheckOut();
 
-                int addItem = int.Parse(GetUserInput("Would you like to add another item(1/2): "));
-                switch (addItem)
-                {
-                    case 1:
-                        runAgain = "y";
-                        // addItem method
-                        break;
-                    case 2:
-                        //checkout method
-                        runAgain = "n";
-                        break;
-                    default:
-                        GetUserInput("Please select one of the options");
-                        break;
-                }
+                Console.Clear();
+                Console.WriteLine(receipt.ToString());
+
+                orderAgain = Validate.GetInput("Would you like to make another order?(y/n) ").ToLower();
+                runAgain = "y";
             }
 
-            CheckOut();
-
-            // print receipt method
-            Console.WriteLine(receipt.ToString());
-
-            //return to the og menu
-        }
-
-        public static string GetUserInput(string message)
-        {
-            string input;
-            Console.Write(message);
-            input = Console.ReadLine();
-            if (input != "")
-            {
-                return input;
-            }
-            return GetUserInput(message);
         }
 
         public static void PrintItemList()
@@ -63,18 +35,24 @@ namespace POSTerminalMidTerm
 
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine($"{i+1}. {items[i].Name} ... {items[i].Price} ");
+                Console.WriteLine($"{i+1}. {items[i].Name} ... {items[i].Price:C2} ");
             }
         }
 
         public static void AddToCart()
         {
-            receipt.AddItemToCart(items[int.Parse(GetUserInput("Please select an item from the list: \n")) - 1]);
+            Item selectedItem = items[Validate.ParseIntFromString("Please select an item from the list: \n", 1, items.Count) - 1];
+            int x = Validate.ParseIntFromString($"How many {selectedItem.Name} would you like?");
+            for (int i = 0; i < x; i++)
+            {
+                receipt.AddItemToCart(selectedItem);
+            }
+            
         }
 
         public static void CheckOut()
         {
-            int userSelection = int.Parse(GetUserInput("How are you paying for your items today?(1.Credit Card\n/2.Cash\n/3.PayPal\n/4.Check\n)"));
+            int userSelection = Validate.ParseIntFromString("How are you paying for your items today?\n1.Credit Card\n2.Cash\n3.PayPal\n4.Check\n", 1, 4);
 
             switch (userSelection)
             {
@@ -110,8 +88,59 @@ namespace POSTerminalMidTerm
                     receipt.PaymentType = check;
                     break;
                 default:
-                    GetUserInput("Please select a valid payment method");
+                    Validate.GetInput("Please select a valid payment method");
                     break;
+            }
+        }
+
+        public static void PrintCart()
+        {
+            for (int i = 0; i < receipt.ShoppingCart.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {receipt.ShoppingCart[i].Name} ... {receipt.ShoppingCart[i].Price}");
+            }
+            Console.WriteLine($"Subtotal: {receipt.Subtotal:C2}");
+        }
+
+        public static void AmazonShop()
+        {
+            Console.WriteLine("Welcome to the Amazon Kiosk");
+
+            int addItem = 0;
+            while (runAgain != "n")
+            {
+                if (addItem != 2)
+                {
+                    PrintItemList();
+                    AddToCart();
+                }
+
+                //switch statement select another item
+
+                addItem = Validate.ParseIntFromString("Would you like to add another item\n1. To add item \n2. To view cart\n3. Checkout", 1, 3);
+                switch (addItem)
+                {
+                    case 1:
+                        runAgain = "y";
+                        Console.Clear();
+                        // addItem method
+                        break;
+                    case 2:
+                        //view cart method
+                        Console.Clear();
+                        PrintCart();
+                        Console.Write("Press enter to continue");
+                        Console.ReadLine();
+                        break;
+                    case 3:
+                        //checkout method
+                        runAgain = "n";
+                        break;
+                    default:
+                        Validate.GetInput("Please select one of the options");
+                        break;
+                }
+
             }
         }
 

@@ -14,7 +14,7 @@ namespace POSTerminalMidTerm
         }
         public override string ToString()
         {
-            return $"Check Number: {CheckNumber}\nCharge Amount: ";
+            return $"Check Number: {CheckNumber}\n";
         }
     }
 }

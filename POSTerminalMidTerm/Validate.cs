@@ -9,7 +9,7 @@ namespace POSTerminalMidTerm
     {
         public static bool ValidateCardCW(string dataInput)
         {
-            if (Regex.IsMatch(dataInput, @"[0-9]{3}"))
+            if (Regex.IsMatch(dataInput, @"\b[0-9]{3}\b"))
             {
                 return true;
             }
@@ -17,7 +17,7 @@ namespace POSTerminalMidTerm
         }
         public static bool ValidateCardExpiration(string dataInput) 
         {
-            if (Regex.IsMatch(dataInput, @"[0-9]{1,2}\/[0-9]{2}"))
+            if (Regex.IsMatch(dataInput, @"\b[0-9]{1,2}\/[0-9]{2}\b"))
             {
                 return true;
             }
@@ -25,7 +25,7 @@ namespace POSTerminalMidTerm
         }
         public static bool ValidateCardNumber(string dataInput) 
         {
-            if (Regex.IsMatch(dataInput, @"[0-9]{16}"))
+            if (Regex.IsMatch(dataInput, @"\b[0-9]{16}\b"))
             {
                 return true;
             }
@@ -33,7 +33,7 @@ namespace POSTerminalMidTerm
         }
         public static bool ValidateDate(string dateInput)
         {
-            if (Regex.IsMatch(dateInput, @"[0-9]{2}\/[0-9]{2}\/[0-9]{4}$"))
+            if (Regex.IsMatch(dateInput, @"\b[0-9]{1,2}\/[0-9]{2}\/[0-9]{4}$\b"))
             {
                 return true;
             }
@@ -41,7 +41,7 @@ namespace POSTerminalMidTerm
         }
         public static bool ValidateEmailAddr(string emailInput)
         {
-            if (Regex.IsMatch(emailInput, @"[a-zA-Z0-9]{5,30}@[A-Za-z]{5,10}\.[A-Za-z]{2,3}$"))
+            if (Regex.IsMatch(emailInput, @"[a-zA-Z0-9]{3,30}@[A-Za-z]{3,10}\.[A-Za-z]{2,3}$"))
             {
                 return true;
             }
@@ -80,7 +80,7 @@ namespace POSTerminalMidTerm
             try
             {
                 temp = int.Parse(GetInput(message));
-                if (temp >= max && temp <= min)
+                if (temp <= max && temp >= min)
                 {
                     return temp;
                 }

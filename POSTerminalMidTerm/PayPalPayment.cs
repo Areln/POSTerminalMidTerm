@@ -27,7 +27,7 @@ namespace POSTerminalMidTerm
         }
         public override string ToString()
         {
-            return $"EMail: {Email}\nCharge Amount: {ChargeAmount:C2}";
+            return $"EMail: {Email}\n";
         }
     }
 }
