@@ -12,7 +12,6 @@ namespace POSTerminalMidTerm
         static string orderAgain = "y";
         static void Main(string[] args)
         {
-
             while (orderAgain != "n") 
             {
                 Console.Clear();
@@ -97,7 +96,7 @@ namespace POSTerminalMidTerm
         {
             for (int i = 0; i < receipt.ShoppingCart.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {receipt.ShoppingCart[i].Name} ... {receipt.ShoppingCart[i].Price}");
+                Console.WriteLine($"{i + 1}. {receipt.ShoppingCart[i].Name} ... {receipt.ShoppingCart[i].Price:C2}");
             }
             Console.WriteLine($"Subtotal: {receipt.Subtotal:C2}");
         }
