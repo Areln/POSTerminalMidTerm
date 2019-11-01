@@ -6,7 +6,7 @@ namespace POSTerminalMidTerm
 {
     class Receipt
     {
-        public List<Item> ShoppingCart { get; set; }
+        public List<Item> ShoppingCart = new List<Item>();
         public double Total { get; set; }
         public double Subtotal { get; set; }
         public Payment PaymentType { get; set; }
@@ -20,7 +20,16 @@ namespace POSTerminalMidTerm
                 receipt = string.Concat(receipt, $"{i+1}) {ShoppingCart[i].Name} ... {ShoppingCart[i].Price}\n");
             }
             receipt = string.Concat(receipt, "\n", PaymentType.ToString());
+            receipt = string.Concat(receipt, $"\nSub Total: {Subtotal:C2}");
+            receipt = string.Concat(receipt,$"\nTotal: {Total:C2}");
             return receipt;
+        }
+
+        public void AddItemToCart(Item item)
+        {
+            ShoppingCart.Add(item);
+            Subtotal += item.Price;
+            Total += item.Price * (1 + item.TaxRate);
         }
     }
 }

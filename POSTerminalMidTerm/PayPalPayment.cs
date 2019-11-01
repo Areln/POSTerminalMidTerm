@@ -9,10 +9,9 @@ namespace POSTerminalMidTerm
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public override void GetPayment(double total)
+        public override void GetPayment()
         {
             string temp;
-            ChargeAmount = total;
  
             while (string.IsNullOrWhiteSpace(Email))
             {

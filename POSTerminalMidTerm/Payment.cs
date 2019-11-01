@@ -8,6 +8,6 @@ namespace POSTerminalMidTerm
     {
         public double ChargeAmount { get; set; }
 
-        public abstract void GetPayment(double total);
+        public abstract void GetPayment();
     }
 }

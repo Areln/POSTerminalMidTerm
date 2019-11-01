@@ -12,20 +12,12 @@ namespace POSTerminalMidTerm
 
         public CashPayment() { }
 
-        public override void GetPayment(double total)
+        public override void GetPayment()
         {
             
-            ChargeAmount = total;
             //replace with the validation methods
             Input = Validate.ParseDoubleFromString("Enter amount of cash you are giving:");
-            if (Input >= total)
-            {
-                Change = Input - total;
-            }
-            else
-            {
-                Console.WriteLine("Not enough money");
-            }
+
         }
         public override string ToString()
         {

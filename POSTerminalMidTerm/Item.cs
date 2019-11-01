@@ -11,7 +11,7 @@ namespace POSTerminalMidTerm
         public string Name { get; set; }
         public ItemType Type { get; set; }
         public double Price { get; set; }
-        public double TaxRate { get; set; }
+        public double TaxRate { get { return 0.06; } }
 
         public Item() { }
         public Item(string name, ItemType type, double price) 

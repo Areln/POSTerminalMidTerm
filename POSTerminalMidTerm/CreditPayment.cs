@@ -13,10 +13,9 @@ namespace POSTerminalMidTerm
 
         public CreditPayment() { }
 
-        public override void GetPayment(double total)
+        public override void GetPayment()
         {
             string temp = "";
-            ChargeAmount = total;
             //prompt user to enter card info, TODO: validate and inputted info
             while (string.IsNullOrWhiteSpace(CardNumber))
             {
@@ -56,7 +55,7 @@ namespace POSTerminalMidTerm
         }
         public override string ToString()
         {
-            return $"Payment Type: Credit\n**** **** **** {CardNumber.Substring(12,4)}\n{CardExpiration}\nName: {CardHolderName}\nCharge Amount: {ChargeAmount:C2}";
+            return $"Payment Type: Credit\n**** **** **** {CardNumber.Substring(12,4)}\n{CardExpiration}\nName: {CardHolderName}\n";
         }
     }
 }
