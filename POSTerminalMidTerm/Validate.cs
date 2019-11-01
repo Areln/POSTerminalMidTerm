@@ -74,6 +74,28 @@ namespace POSTerminalMidTerm
                 return ParseIntFromString(message);
             }
         }
+        public static int ParseIntFromString(string message, int min, int max)
+        {
+            int temp;
+            try
+            {
+                temp = int.Parse(GetInput(message));
+                if (temp >= max && temp <= min)
+                {
+                    return temp;
+                }
+                else
+                {
+                    Console.WriteLine("Selection out of range, try again");
+                    return ParseIntFromString(message, min, max);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong, please try again: ");
+                return ParseIntFromString(message);
+            }
+        }
         public static double ParseDoubleFromString(string message)
         {
             try
