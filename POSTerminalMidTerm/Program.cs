@@ -26,6 +26,7 @@ namespace POSTerminalMidTerm
                 runAgain = "y";
             }
 
+            Console.WriteLine("\n\t\t\tThank you for shopping with us!");
         }
 
         public static void PrintItemList()
@@ -148,6 +149,14 @@ namespace POSTerminalMidTerm
         }
         public static void AmazonShop()
         {
+            Console.WriteLine("          :::          :::   :::           :::        :::::::::       ::::::::       ::::    ::: ");
+            Console.WriteLine("       :+: :+:       :+:+: :+:+:        :+: :+:           :+:       :+:    :+:      :+:+:   :+:  ");
+            Console.WriteLine("     +:+   +:+     +:+ +:+:+ +:+      +:+   +:+         +:+        +:+    +:+      :+:+:+  +:+   ");
+            Console.WriteLine("   +#++:++#++:    +#+  +:+  +#+     +#++:++#++:       +#+         +#+    +:+      +#+ +:+ +#+    ");
+            Console.WriteLine("  +#+     +#+    +#+       +#+     +#+     +#+      +#+          +#+    +#+      +#+  +#+#+#     ");
+            Console.WriteLine(" #+#     #+#    #+#       #+#     #+#     #+#     #+#           #+#    #+#      #+#   #+#+#      ");
+            Console.WriteLine("###     ###    ###       ###     ###     ###    #########       ########       ###    ####       ");
+            Console.WriteLine();
             Console.WriteLine("Welcome to the Amazon Kiosk");
 
             int addItem = 0;
