@@ -101,12 +101,50 @@ namespace POSTerminalMidTerm
             }
             Console.WriteLine($"Subtotal: {receipt.Subtotal:C2}");
         }
-        public static void RemoveItemFromCart() 
+        public static void RemoveItemFromCart()
         {
+            bool hasMultiple = false;
+
+            if (receipt.ShoppingCart.Count == 0) 
+            { 
+                Console.WriteLine("There are no items to remove in the cart");  
+                return; 
+            }
+
             Console.Clear();
             PrintCart();
-            int selectedItem = Validate.ParseIntFromString("Please select an item from your cart to remove: \n", 1, receipt.ShoppingCart.Count) - 1;
-            receipt.ShoppingCart.RemoveAt(selectedItem);
+            Item selectedItem = receipt.ShoppingCart[Validate.ParseIntFromString("Please select an item from your cart to remove: \n", 1, receipt.ShoppingCart.Count) - 1];
+            // this is checking to see how many items to remove
+            foreach (Item item in receipt.ShoppingCart)
+            {
+                if (item.Name == selectedItem.Name)
+                {
+                    hasMultiple = true;
+                }
+            }
+            if (hasMultiple == true)
+            {
+                int removeAmount = Validate.ParseIntFromString($"How many {selectedItem.Name} would you like to remove?: \n");
+                while(removeAmount > 0)
+                {
+                    if (receipt.ShoppingCart.Contains(selectedItem))
+                    {
+                        receipt.ShoppingCart.Remove(selectedItem);
+                        removeAmount--;
+
+                        receipt.Subtotal -= selectedItem.Price;
+                        receipt.TaxTotal -= selectedItem.Price * selectedItem.TaxRate;
+                        receipt.Total -= selectedItem.Price * (1 + selectedItem.TaxRate);
+                    }
+                    else
+                    {
+                        removeAmount = 0;
+                        Console.WriteLine("test");
+                    }
+                }
+                return;
+            }
+            receipt.ShoppingCart.Remove(selectedItem);
         }
         public static void AmazonShop()
         {
@@ -123,7 +161,7 @@ namespace POSTerminalMidTerm
 
                 //switch statement select another item
 
-                addItem = Validate.ParseIntFromString("Would you like to add another item\n1. To add item \n2. To view cart\n3. Remove item from cart\n3. Checkout", 1, 4);
+                addItem = Validate.ParseIntFromString("Would you like to add another item\n1. To add item \n2. To view cart\n3. Remove item from cart\n4. Checkout", 1, 4);
                 switch (addItem)
                 {
                     case 1:
