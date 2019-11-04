@@ -7,13 +7,24 @@ namespace POSTerminalMidTerm
 {
     class Validate
     {
-        public static bool ValidateCardCW(string dataInput)
+        public static bool ValidateCardCW(string dataInput, CardType cardType)
         {
-            if (Regex.IsMatch(dataInput, @"\b[0-9]{3}\b"))
+            if (cardType == CardType.AmericanExpress)
             {
-                return true;
+                if (Regex.IsMatch(dataInput, @"\b[0-9]{4}\b"))
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            else
+            {
+                if (Regex.IsMatch(dataInput, @"\b[0-9]{3}\b"))
+                {
+                    return true;
+                }
+                return false;
+            }
         }
         public static bool ValidateCardExpiration(string dataInput) 
         {
@@ -23,13 +34,24 @@ namespace POSTerminalMidTerm
             }
             return false;
         }
-        public static bool ValidateCardNumber(string dataInput) 
+        public static CardType ValidateCardNumber(string dataInput) 
         {
-            if (Regex.IsMatch(dataInput, @"\b[0-9]{16}\b"))
+            if (Regex.IsMatch(dataInput, @"\b4(?:\d[ -]*?){15}\b"))
             {
-                return true;
+                return CardType.Visa;
             }
-            return false;
+            else if (Regex.IsMatch(dataInput, @"^5[1-5][0-9]{14}\b"))
+            {
+                return CardType.Mastercard;
+            }
+            else if (Regex.IsMatch(dataInput, @"\b34(?:\d[ -]*?){13}\b") || Regex.IsMatch(dataInput, @"\b37(?:\d[ -]*?){13}\b"))
+            {
+                return CardType.AmericanExpress;
+            }
+            else
+            {
+                return CardType.Broken;
+            }
         }
         public static bool ValidateDate(string dateInput)
         {

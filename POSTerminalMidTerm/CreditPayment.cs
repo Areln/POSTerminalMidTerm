@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace POSTerminalMidTerm
 {
+    public enum CardType { AmericanExpress, Visa, Mastercard, Broken }
     class CreditPayment : Payment
     {
+
         public string CardNumber { get; set; }
         public string CardExpiration { get; set; }
         public string CardHolderName { get; set; }
         public string CW { get; set; }
-
-        public CreditPayment() { }
+        public CardType CType { get; set; }
 
         public override void GetPayment()
         {
@@ -20,9 +22,11 @@ namespace POSTerminalMidTerm
             while (string.IsNullOrWhiteSpace(CardNumber))
             {
                 temp = Validate.GetInput("Enter Card Number: ");
-                if (Validate.ValidateCardNumber(temp))
+                CardType testType = Validate.ValidateCardNumber(temp);
+                if (testType != CardType.Broken)
                 {
                     CardNumber = temp;
+                    CType = testType;
                     temp = "";
                     break;
                 }
@@ -43,7 +47,7 @@ namespace POSTerminalMidTerm
             while (string.IsNullOrWhiteSpace(CW))
             {
                 temp = Validate.GetInput("Enter CW: ");
-                if (Validate.ValidateCardCW(temp))
+                if (Validate.ValidateCardCW(temp, CType))
                 {
                     CW = temp;
                     temp = "";
@@ -55,7 +59,7 @@ namespace POSTerminalMidTerm
         }
         public override string ToString()
         {
-            return $"Payment Type: Credit\n**** **** **** {CardNumber.Substring(12,4)}\n{CardExpiration}\nName: {CardHolderName}\n";
+            return $"Payment Type: Credit\n{CType}: **** **** **** {CardNumber.Substring(12)}\n{CardExpiration}\nName: {CardHolderName}\n";
         }
     }
 }
