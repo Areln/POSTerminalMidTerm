@@ -24,7 +24,9 @@ namespace POSTerminalMidTerm
 
                 orderAgain = Validate.GetInput("Would you like to make another order?(y/n) ").ToLower();
                 runAgain = "y";
+                receipt.ShoppingCart.Clear();
             }
+
 
             Console.WriteLine("\n\t\t\tThank you for shopping with us!");
         }
@@ -91,7 +93,7 @@ namespace POSTerminalMidTerm
                     Validate.GetInput("Please select a valid payment method");
                     break;
             }
-            receipt.ShoppingCart.Clear();
+            
         }
 
         public static void PrintCart()
