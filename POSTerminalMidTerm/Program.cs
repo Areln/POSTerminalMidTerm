@@ -90,6 +90,7 @@ namespace POSTerminalMidTerm
                     Validate.GetInput("Please select a valid payment method");
                     break;
             }
+            receipt.ShoppingCart.Clear();
         }
 
         public static void PrintCart()
@@ -100,7 +101,13 @@ namespace POSTerminalMidTerm
             }
             Console.WriteLine($"Subtotal: {receipt.Subtotal:C2}");
         }
-
+        public static void RemoveItemFromCart() 
+        {
+            Console.Clear();
+            PrintCart();
+            int selectedItem = Validate.ParseIntFromString("Please select an item from your cart to remove: \n", 1, receipt.ShoppingCart.Count) - 1;
+            receipt.ShoppingCart.RemoveAt(selectedItem);
+        }
         public static void AmazonShop()
         {
             Console.WriteLine("Welcome to the Amazon Kiosk");
@@ -108,7 +115,7 @@ namespace POSTerminalMidTerm
             int addItem = 0;
             while (runAgain != "n")
             {
-                if (addItem != 2)
+                if (addItem != 2 && addItem != 3)
                 {
                     PrintItemList();
                     AddToCart();
@@ -116,7 +123,7 @@ namespace POSTerminalMidTerm
 
                 //switch statement select another item
 
-                addItem = Validate.ParseIntFromString("Would you like to add another item\n1. To add item \n2. To view cart\n3. Checkout", 1, 3);
+                addItem = Validate.ParseIntFromString("Would you like to add another item\n1. To add item \n2. To view cart\n3. Remove item from cart\n3. Checkout", 1, 4);
                 switch (addItem)
                 {
                     case 1:
@@ -132,6 +139,11 @@ namespace POSTerminalMidTerm
                         Console.ReadLine();
                         break;
                     case 3:
+                        //removes item from cart
+                        RemoveItemFromCart();
+
+                        break;
+                    case 4:
                         //checkout method
                         runAgain = "n";
                         break;
